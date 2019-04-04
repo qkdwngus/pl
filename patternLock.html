@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="author" content="puravidaapps.com">
+  <meta charset="utf-8">
+
+  <!-- Android viewport setting “user-scalable=no” breaks width / zoom level of viewport
+       http://stackoverflow.com/a/12785631/1545993 -->
+  <meta name="viewport" content="width=640px, initial-scale=.5, maximum-scale=.5" />
+
+  <!-- Pattern Lock is a light weight plugin to simulate android like pattern lock mechanism
+       by Sudhanshu Yadav, http://ignitersworld.com/lab/patternLock.html -->
+  <link rel="stylesheet" href="patternLock.css" />
+  <script src="jquery-1.8.0.min.js"></script>
+  <script src="patternLock.js"></script>
+
+  <title>PatternLock</title>
+  <style>
+    body{background:#3382c0};
+  </style>
+
+</head>
+
+<body>
+  <div id="patternContainer" class="pattern-holder"></div>
+
+  <script>
+    var lock = new PatternLock("#patternContainer");
+
+    // pass code to unlock from App Inventor to JavaScript, e.g. '12369'
+    var code = window.AppInventor.getWebViewString();
+
+    // check for correct code
+    lock.checkForPattern(code,function(){
+      window.AppInventor.setWebViewString('unlocked');
+    },function(){
+      window.AppInventor.setWebViewString('Pattern is not correct');
+    });
+  </script>
+</body>
+</html>
